@@ -53,3 +53,12 @@ header .member {
 .container div {
     background: white;
 }
+.schedule {
+    display: inline-block;
+    width: 65%;
+    height: 750px;
+    margin: 60px;
+    float: right;
+    padding: 20px;
+    background: #D8D8C3;
+}

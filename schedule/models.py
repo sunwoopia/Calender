@@ -12,4 +12,3 @@ class schedule(models.Model):
     content = models.CharField(max_length=300)
     categoryNum = models.ForeignKey(category, on_delete=models.CASCADE)
     scheduleOwner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-

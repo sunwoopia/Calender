@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Sunlendar</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div>
+            <img class="logo" src="../static/logo/logo.png">
+            <div class="right">
+                <a class="login">
+                    로그인
+                </a>
+                <a class="member">
+                    회원가입
+                </a>
+            </div>
+            <div>
+                <h1 class="date">
+                    xxxx년 xx월 xx일
+                </h1>
+            </div>
+
+        </div>
+    </header>
+    <div class="subcontainer">
+        <a href="{% url 'schedule' %}">일정등록</a>
+    </div>
+    {% block container %}
+    {% endblock %}
+</body>
+<!--<script src="script.js"></script>-->
+</html>

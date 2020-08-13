@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block container %}
+<div class="schedule">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">저장</button>
+    </form>
+</div>
+{% endblock %}
