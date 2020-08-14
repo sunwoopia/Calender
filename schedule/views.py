@@ -14,9 +14,7 @@ def schedule(request):
         if form.is_valid():
             post = form.save(commit=False)
             # post.scheduleOwner = request.user.id
-            print("값 검증 성공")
             form.save()
-
 
     form = postSchedule()
 
