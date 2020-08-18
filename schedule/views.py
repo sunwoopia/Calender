@@ -7,6 +7,7 @@ from .models import schedule
 def index(request):
     return render(request, 'index.html')
 
+
 def schedule(request):
     if request.method == 'POST':
         form = postSchedule(request.POST)
