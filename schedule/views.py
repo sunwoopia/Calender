@@ -14,7 +14,7 @@ def schedule(request):
         print("데이터가 넘어옴")
         if form.is_valid():
             post = form.save(commit=False)
-            # post.scheduleOwner = request.user.id
+            post.scheduleOwner = request.user.id
             form.save()
 
     form = postSchedule()
