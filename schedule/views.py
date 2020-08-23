@@ -16,6 +16,7 @@ def schedule(request):
             post.scheduleOwner = request.user.id
             form.save()
 
+
     form = postSchedule()
 
     return render(request, 'schedule.html', {'form': form})
