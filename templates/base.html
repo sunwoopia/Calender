@@ -11,10 +11,10 @@
         <div>
             <img class="logo" src="../static/logo/logo.png">
             <div class="right">
-                <a class="login">
+                <a href="{% url 'login' %}" class="login">
                     로그인
-                </a>
-                <a class="member">
+                </a >
+                <a href="{% url 'signup' %}" class="member">
                     회원가입
                 </a>
             </div>
@@ -26,11 +26,10 @@
 
         </div>
     </header>
+    {% block container %}
     <div class="subcontainer">
         <a href="{% url 'schedule' %}">일정등록</a>
     </div>
-    {% block container %}
     {% endblock %}
 </body>
-<!--<script src="script.js"></script>-->
 </html>
