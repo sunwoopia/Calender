@@ -2,10 +2,11 @@
 {% block container %}
 <div>
     <h1>회원가입</h1>
-    <form method="POST">
+    <form method="post" action="">
         {% csrf_token %}
-        {{ signup_form }}
-        <input type="submit" name="Submit"/>
+        {{ form.as_p }}
+        <input type="submit" value="회원가입" />
     </form>
+
 </div>>
 {% endblock %}
