@@ -3,8 +3,21 @@
 <div class="schedule">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+<!--        {{ form.as_p }}-->
+        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+            {{ form.date }}
+            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
         <button type="submit">저장</button>
     </form>
 </div>
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+    });
+  });
+</script>
 {% endblock %}

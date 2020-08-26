@@ -33,7 +33,7 @@ def signup(request):
     else:
         form = UserForm()
         return render(request, 'signup.html', {'form': form})
-def login(request):
+def signin(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         username = request.POST['username']
@@ -47,7 +47,10 @@ def login(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
-
+# def get_name(request):
+#     name = User.objects.order_by('name')
+#     context = {'name': name}
+#     return render(request, 'index.html', name)
 # def signup(request):
 #     # HTTP Method가 POST 인 경우
 #     if request.method == 'POST':
