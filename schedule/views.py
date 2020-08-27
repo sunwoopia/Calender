@@ -5,7 +5,7 @@ from .form import UserForm, LoginForm
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.template import RequestContext
+
 
 def index(request):
     return render(request, 'index.html')
@@ -15,13 +15,13 @@ def schedule(request):
         form = postSchedule(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.scheduleOwner = request.user.id
-            form.save()
-
-
-    form = postSchedule()
-
-    return render(request, 'schedule.html', {'form': form})
+            post.scheduleOwner_id = request.user.id
+            post.save()
+            print(request.user.id)
+            return redirect('index')
+    else:
+        form = postSchedule()
+        return render(request, 'schedule.html', {'form': form})
 
 def signup(request):
     if request.method == "POST":
@@ -47,6 +47,7 @@ def signin(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
+
 # def get_name(request):
 #     name = User.objects.order_by('name')
 #     context = {'name': name}
