@@ -5,19 +5,20 @@ from .form import UserForm, LoginForm
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-
+from .models import schedule as Sche
 
 def index(request):
-    return render(request, 'index.html')
+    post = Sche.objects.all()
+    return render(request, 'index.html', {'post': post})
+
 
 def schedule(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.id:
         form = postSchedule(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.scheduleOwner_id = request.user.id
             post.save()
-            print(request.user.id)
             return redirect('index')
     else:
         form = postSchedule()
@@ -34,9 +35,9 @@ def signup(request):
         form = UserForm()
         return render(request, 'signup.html', {'form': form})
 def signin(request):
-    if request.method == "POST":
+    if request.Pmethod == "POST":
         form = LoginForm(request.POST)
-        username = request.POST['username']
+        username = request.OST['username']
         password = request.POST['password']
         user = authenticate(username = username, password = password)
         if user is not None:
@@ -47,6 +48,7 @@ def signin(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
+
 
 # def get_name(request):
 #     name = User.objects.order_by('name')

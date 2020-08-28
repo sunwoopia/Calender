@@ -4,7 +4,11 @@
     <a href="{% url 'schedule' %}">일정등록</a>
 </div>
 <div class="container">
-    <div></div>
+    <div>
+        {% for schedule in post %}
+        {{ schedule.startDate }}
+        {% endfor %}}
+    </div>
     <div></div>
     <div></div>
     <div></div>
