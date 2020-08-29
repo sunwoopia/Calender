@@ -6,9 +6,23 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from .models import schedule as Sche
+import datetime
+from datetime import timedelta
+
+from urllib.parse import parse_qs
 
 def index(request):
-    post = Sche.objects.all()
+    requestDate = parse_qs(request.META['QUERY_STRING'])
+    print(requestDate['year'][0])
+    print(requestDate['month'][0])
+    today = datetime.datetime.now()
+    nowYear = int(today.strftime('%Y'))
+    nowMonth = int(today.strftime('%m'))
+    nextMonth = nowMonth + 1
+    nextDate = datetime.datetime(nowYear, nextMonth, 1, 23, 59, 59)
+    lastDay = nextDate - timedelta(days=1)
+    lastDays = int(lastDay.strftime('%d'))
+    post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(nowYear,nowMonth,1,0,0,0)).filter(lastDate__lte=datetime.datetime(nowYear,nowMonth,lastDays,23,59,59))
     return render(request, 'index.html', {'post': post})
 
 
