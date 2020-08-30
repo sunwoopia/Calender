@@ -8,21 +8,27 @@ from django.contrib.auth.models import User
 from .models import schedule as Sche
 import datetime
 from datetime import timedelta
-
 from urllib.parse import parse_qs
 
 def index(request):
     requestDate = parse_qs(request.META['QUERY_STRING'])
-    print(requestDate['year'][0])
-    print(requestDate['month'][0])
     today = datetime.datetime.now()
     nowYear = int(today.strftime('%Y'))
     nowMonth = int(today.strftime('%m'))
-    nextMonth = nowMonth + 1
+
+    try:
+        year = int(requestDate['year'][0])
+        month = int(requestDate['month'][0])
+    except KeyError:
+        year = nowYear
+        month = nowMonth
+
+    nextMonth = month + 1
     nextDate = datetime.datetime(nowYear, nextMonth, 1, 23, 59, 59)
     lastDay = nextDate - timedelta(days=1)
     lastDays = int(lastDay.strftime('%d'))
-    post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(nowYear,nowMonth,1,0,0,0)).filter(lastDate__lte=datetime.datetime(nowYear,nowMonth,lastDays,23,59,59))
+    print(nextDate)
+    post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
     return render(request, 'index.html', {'post': post})
 
 
@@ -62,36 +68,3 @@ def signin(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
-
-
-# def get_name(request):
-#     name = User.objects.order_by('name')
-#     context = {'name': name}
-#     return render(request, 'index.html', name)
-# def signup(request):
-#     # HTTP Method가 POST 인 경우
-#     if request.method == 'POST':
-#         signup_form = UserCreationForm(request.POST)
-#     # 모델폼의 유효성 검증이 valid할 경우, DB에 저장
-#         if signup_form.is_valid():
-#             signup_form.save()
-#         return redirect('/')
-#
-# # HTTP Method가 GET 인 경우
-#     else:
-#         signup_form = UserCreationForm()
-#
-#     return render(request, 'signup.html', {'signup_form': signup_form})
-
-
-# def login(request):
-#     if request.method == 'POST':
-#         login_form = AuthenticationForm(request, request.POST)
-#         if login_form.is_valid():
-#             auth_login(request, login_form.get_user())
-#         return redirect('/')
-#
-#     else:
-#         login_form = AuthenticationForm()
-#
-#     return render(request, 'login.html', {'login_form': login_form})

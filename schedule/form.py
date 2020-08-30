@@ -13,10 +13,6 @@ class postSchedule(forms.ModelForm):
             'startDate': DateInput(attrs={'type': 'date'}),
             'lastDate': DateInput(attrs={'type': 'date'}),
         }
-        # def __init__(self, *args, **kwargs):
-        #     super(postSchedule, self).__init__(*args, **kwargs)
-        #     self.fields['startDate'].widgets = widgets.AdminSplitDateTime()
-        #     self.fields['lastDate'].widgets = widgets.AdminSplitDateTime()
 
 class UserForm(forms.ModelForm):
     class Meta:
