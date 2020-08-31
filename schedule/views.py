@@ -9,12 +9,16 @@ from .models import schedule as Sche
 import datetime
 from datetime import timedelta
 from urllib.parse import parse_qs
-
+# def arrangeSchedule(post):
+#     array = []
+#     for x in post:
+#
 def index(request):
     requestDate = parse_qs(request.META['QUERY_STRING'])
     today = datetime.datetime.now()
     nowYear = int(today.strftime('%Y'))
     nowMonth = int(today.strftime('%m'))
+    nowDay = int(today.strftime('%d'))
 
     try:
         year = int(requestDate['year'][0])
@@ -22,14 +26,13 @@ def index(request):
     except KeyError:
         year = nowYear
         month = nowMonth
-
+    firstDay = datetime.datetime(year,month,1,0,0,0)
     nextMonth = month + 1
     nextDate = datetime.datetime(nowYear, nextMonth, 1, 23, 59, 59)
     lastDay = nextDate - timedelta(days=1)
     lastDays = int(lastDay.strftime('%d'))
-    print(nextDate)
     post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
-    return render(request, 'index.html', {'post': post})
+    return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay})
 
 
 def schedule(request):

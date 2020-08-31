@@ -36,22 +36,44 @@ header .member {
     margin: 60px;
     background-color: #D8D8C3;
 }
+.titlecontainer {
+    display: grid;
+    background: #D8D8C3;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 10px;
+    height: 30px;
+    padding: 10px;
+}
+.titlecontainer div {
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
 .container {
-    display: inline-grid;
+    display: grid;
     background-color: #D8D8C3;
-    width: 65%;
-    height: 750px;
-    margin: 60px;
-    float: right;
-    padding: 20px;
+    height: 720px;
+    padding: 10px;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(7, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 }
+.ct {
+    margin: 60px;
+    background-color: #D8D8C3;
+    display: inline-block;
+    width: 65%;
+    float: right;
+    padding: 0;
+}
 
 .container div {
     background: white;
+    border-radius: 10px;
+}
+.day {
+    height: 30px;
 }
 .schedule {
     display: inline-block;
