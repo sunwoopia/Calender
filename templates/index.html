@@ -1,26 +1,6 @@
 {% extends 'base.html' %}
 {% block container %}
-<script>
-    let arr = [];
-    let dictionary = {};
-    {% for schedule in post %}
-        arr.push({
-            startDate: '{{ schedule.startDate }}',
-            lastDate: '{{ schedule.lastDate }}',
-            title: '{{ schedule.title }}',
-            content: '{{ schedule.content }}',
-            categoryNum: '{{ schedule.categoryNum}}'
-        });
-    {% endfor %}
-    let week = ['일','월','화','수','목','금','토']
-    let now = new Date().getDay()
-    let todayLabel = week[now]
 
-    let dates = document.querySelectorAll('.container div');
-
-    dates[0]
-
-</script>
 
 <div class="subcontainer">
     <a href="{% url 'schedule' %}">일정등록</a>
@@ -36,7 +16,7 @@
         <div class="day">Saturday</div>
     </div>
     <div class="container">
-        <div id="todayLabel"></div>
+        <div></div>
         <div></div>
         <div></div>
         <div></div>
@@ -73,5 +53,36 @@
         <div></div>
     </div>
 </div>
-
+<script>
+    let arr = [];
+    let dictionary = {};
+    {% for schedule in post %}
+        arr.push({
+            startDate: '{{ schedule.startDate }}',
+            lastDate: '{{ schedule.lastDate }}',
+            title: '{{ schedule.title }}',
+            content: '{{ schedule.content }}',
+            categoryNum: '{{ schedule.categoryNum}}'
+        });
+    {% endfor %}
+    let now = new Date();
+    let firstDate = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+    let lastlast = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
+    let lastDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    let dates = document.querySelectorAll('.container div');
+    let add = 1;
+    let add2 = 1;
+    for (let i = firstDate; i < lastDate + firstDate; i++) {
+        dates[i].innerHTML = add;
+        add++
+    }
+    for (let i = firstDate - 1; i >= 0; i--) {
+        dates[i].innerHTML = lastlast;
+        lastlast--
+    }
+    for (let i = lastDate + firstDate ; i < 35; i++) {
+        dates[i].innerHTML = add2;
+        add2++
+    }
+</script>
 {% endblock %}
