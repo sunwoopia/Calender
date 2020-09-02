@@ -9,10 +9,7 @@ from .models import schedule as Sche
 import datetime
 from datetime import timedelta
 from urllib.parse import parse_qs
-# def arrangeSchedule(post):
-#     array = []
-#     for x in post:
-#
+
 def index(request):
     requestDate = parse_qs(request.META['QUERY_STRING'])
     today = datetime.datetime.now()

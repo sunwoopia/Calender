@@ -53,6 +53,7 @@
         <div></div>
     </div>
 </div>
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
     let arr = [];
     let dictionary = {};
@@ -83,6 +84,18 @@
     for (let i = lastDate + firstDate ; i < 35; i++) {
         dates[i].innerHTML = add2;
         add2++
+    }
+    moment.lang('kr');
+    let mom = moment(arr[0]['startDate'])
+    let m2 = mom.format(DD)
+    console.log(arr[0]['startDate'])
+    console.log(m2)
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < 35; j++) {
+            if (arr[i]['startDate']== dates[j]) {
+                dates[i].innerHTML = 'good';
+            }
+        }
     }
 </script>
 {% endblock %}
