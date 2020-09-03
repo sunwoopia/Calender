@@ -71,29 +71,30 @@
     let lastlast = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
     let lastDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
     let dates = document.querySelectorAll('.container div');
-    let add = 1;
-    let add2 = 1;
+    let add = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+    let addDay = 1
     for (let i = firstDate; i < lastDate + firstDate; i++) {
-        dates[i].innerHTML = add;
-        add++
+        dates[i].innerHTML = add[i-firstDate];
     }
     for (let i = firstDate - 1; i >= 0; i--) {
         dates[i].innerHTML = lastlast;
         lastlast--
     }
     for (let i = lastDate + firstDate ; i < 35; i++) {
-        dates[i].innerHTML = add2;
-        add2++
+        dates[i].innerHTML = addDay;
+        addDay++
     }
-    moment.lang('kr');
-    let mom = moment(arr[0]['startDate'])
-    let m2 = mom.format(DD)
-    console.log(arr[0]['startDate'])
-    console.log(m2)
+
     for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < 35; j++) {
-            if (arr[i]['startDate']== dates[j]) {
-                dates[i].innerHTML = 'good';
+        let startMom = moment(arr[i]['startDate'], "YYYY-M-D HH:mm")
+        let lastMom = moment(arr[i]['lastDate'], "YYYY-M-D HH:mm")
+        let mom = parseInt(startMom.format("DD"))
+        let mom2 = parseInt(lastMom.format("DD"))
+        for (let j = firstDate; j < lastDate; j++) {
+            if (parseInt(mom + firstDate - 1) == j) {
+                for (let k = j; k <= j + mom2 - mom; k++) {
+                    dates[k].innerHTML += arr[i]['title'];
+                }
             }
         }
     }
