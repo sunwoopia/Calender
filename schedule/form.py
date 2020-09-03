@@ -1,9 +1,15 @@
 from django import forms
 from .models import schedule
+from. models import category
 from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):
     input_type = 'date'
+
+class signupCategory(forms.ModelForm):
+    class Meta:
+        model = category
+        fields = ['categoryName']
 
 class postSchedule(forms.ModelForm):
     class Meta:

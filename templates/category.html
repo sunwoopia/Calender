@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block container %}
+<div class="subcontainer">
+    <a href="{% url 'schedule' %}">일정등록</a>
+    <a href="{% url 'category' %}">카테고리등록</a>
+</div>
+<div class="ct">
+    <h1>일정 등록</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">저장</button>
+    </form>
+</div>
+{% endblock %}

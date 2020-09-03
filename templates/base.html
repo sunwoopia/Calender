@@ -27,12 +27,12 @@
                     {{ nowYear }}년 {{ nowMonth }}월 {{ nowDay }}일
                 </h1>
             </div>
-
         </div>
     </header>
     {% block container %}
     <div class="subcontainer">
         <a href="{% url 'schedule' %}">일정등록</a>
+        <a href="{% url 'category' %}">카테고리등록</a>
     </div>
     {% endblock %}
 </body>
