@@ -31,7 +31,6 @@ def index(request):
     post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
     return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay})
 
-
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
