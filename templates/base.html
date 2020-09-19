@@ -1,39 +1,153 @@
 <!DOCTYPE html>
 <html lang="ko">
-{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Sunlendar</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div>
-            <img class="logo" src="../static/logo/logo.png">
-            <div class="right">
-                {% if user.is_authenticated %}
-                    안녕하세요 {{ user.get_username }}님
-                    <a href="{% url 'logout' %}">로그아웃</a>
-                {% else %}
-                    <a href="{% url 'login' %}">로그인</a>
-                    <a href="{% url 'signup' %}" class="member">
-                        회원가입
-                    </a>
-                {% endif %}
-
+        <div class="headerDiv">
+            <img src="로고.png" class="logo">
+            <div class="dateDiv">
+                <input type="button" class="btn1">
+                <div class="date">
+                    2020년 09월
+                </div>
+                <input type="button" class="btn2">
             </div>
-            <div>
-                <h1 class="date">
-                    {{ nowYear }}년 {{ nowMonth }}월 {{ nowDay }}일
-                </h1>
+            <div class="sign">
+                <div>로그인</div>
+                <div>회원가입</div>
             </div>
         </div>
     </header>
-    {% block container %}
-    <div class="subcontainer">
-        <a href="{% url 'schedule' %}">일정등록</a>
-        <a href="{% url 'category' %}">카테고리등록</a>
+    <div class="container">
+        <aside>
+            <nav>
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; margin: 20px">
+                        MENU
+                    </div>
+                    <div>
+                        <ul>
+                            <li>일정 추가</li>
+                            <li>카테고리 추가</li>
+                            <li>설정</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="category">
+                    <div style="font-size: 24px; font-weight: bold; margin: 20px">
+                        CATEGORY
+                    </div>
+                    <div>
+                        <ul>
+                            <li><input type="checkbox" style="margin-right: 5px;">WINK</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">과제</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">술</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">기타</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <main>
+            <div class="day">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+            </div>
+            <div class="calendar">
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da">1</div>
+                <div class="da">2</div>
+                <div class="da">3</div>
+                <div class="da">4</div>
+                <div class="da">5</div>
+                <div class="da">6</div>
+                <div class="da">7</div>
+                <div class="da">8</div>
+                <div class="da">9</div>
+                <div class="da">10</div>
+                <div class="da">11</div>
+                <div class="da">12</div>
+                <div class="da">13</div>
+                <div class="da">14</div>
+                <div class="da">
+                    15
+                    <div>
+                        <div class="schedule">윙크 회의</div>
+                        <div class="schedule">반응형 스터디</div>
+                    </div>
+                </div>
+                <div class="da">16</div>
+                <div class="da">17</div>
+                <div class="da">18</div>
+                <div class="da">19</div>
+                <div class="da">20</div>
+                <div class="da">21</div>
+                <div class="da">22</div>
+                <div class="da">23</div>
+                <div class="da">24</div>
+                <div class="da">25</div>
+                <div class="da">26</div>
+                <div class="da">27</div>
+                <div class="da">28</div>
+                <div class="da">29</div>
+                <div class="da">30</div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+            </div>
+        </main>
     </div>
-    {% endblock %}
+    <footer>
+
+    </footer>
 </body>
-</html>
+</html>{#<!DOCTYPE html>#}
+{#<html lang="ko">#}
+{#{% load static %}#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Sunlendar</title>#}
+{#    <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#    <header>#}
+{#        <div>#}
+{#            <img class="logo" src="../static/logo/logo.png">#}
+{#            <div class="right">#}
+{#                {% if user.is_authenticated %}#}
+{#                    안녕하세요 {{ user.get_username }}님#}
+{#                    <a href="{% url 'logout' %}">로그아웃</a>#}
+{#                {% else %}#}
+{#                    <a href="{% url 'login' %}">로그인</a>#}
+{#                    <a href="{% url 'signup' %}" class="member">#}
+{#                        회원가입#}
+{#                    </a>#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
+{#            <div>#}
+{#                <h1 class="date">#}
+{#                    {{ nowYear }}년 {{ nowMonth }}월 {{ nowDay }}일#}
+{#                </h1>#}
+{#            </div>#}
+{#        </div>#}
+{#    </header>#}
+{#    {% block container %}#}
+{#    <div class="subcontainer">#}
+{#        <a href="{% url 'schedule' %}">일정등록</a>#}
+{#        <a href="{% url 'category' %}">카테고리등록</a>#}
+{#    </div>#}
+{#    {% endblock %}#}
+{#</body>#}
+{#</html>#}
