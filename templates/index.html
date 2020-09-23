@@ -1,59 +1,86 @@
 {% extends 'base.html' %}
 {% block container %}
-
-
-<div class="subcontainer">
-    <a href="{% url 'schedule' %}">일정등록</a>
-    <a href="{% url 'category' %}">카테고리등록</a>
-</div>
-<div class="ct">
-    <div class="titlecontainer">
-        <div class="day">Sunday</div>
-        <div class="day">Monday</div>
-        <div class="day">Tuesday</div>
-        <div class="day">Wednesday</div>
-        <div class="day">Thursday</div>
-        <div class="day">Friday</div>
-        <div class="day">Saturday</div>
+<div class="container">
+            <aside>
+            <nav>
+                <div>
+                    <div style="font-size: 20px; font-weight: bold; margin: 20px">
+                        MENU
+                    </div>
+                    <div>
+                        <ul>
+                            <li><a href="{% url 'schedule' %}">일정등록</a></li>
+                            <li><a href="{% url 'category' %}">카테고리등록</a></li>
+                            <li>설정</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="category">
+                    <div style="font-size: 20px; font-weight: bold; margin: 20px">
+                        CATEGORY
+                    </div>
+                    <div>
+                        <ul>
+                            <li><input type="checkbox" style="margin-right: 5px;">WINK</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">과제</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">술</li>
+                            <li><input type="checkbox" style="margin-right: 5px;">기타</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <main>
+            <div class="day">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+            </div>
+            <div class="calendar">
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+                <div class="da"></div>
+            </div>
+        </main>
     </div>
-    <div class="container">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
+    <footer>
+    </footer>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
     let arr = [];
@@ -72,7 +99,7 @@
     let firstDate = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
     let lastlast = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
     let lastDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    let dates = document.querySelectorAll('.container div');
+    let dates = document.querySelectorAll('.calendar div');
     let add = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
     let addDay = 1
     for (let i = firstDate; i < lastDate + firstDate; i++) {
@@ -102,3 +129,7 @@
     }
 </script>
 {% endblock %}
+<div>
+    <div class="schedule"><div class="text">윙크 회의</div></div>
+    <div class="schedule"><div class="text">스터디</div></div>
+</div>
