@@ -199,13 +199,9 @@ footer {
     align-items: center;
     justify-content: space-between;
 }
-
-.inputbox {
+.signup input {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-}
-.textbox {
     width: 400px;
     height: 50px;
     border: solid 1px #dadada;
@@ -214,6 +210,11 @@ footer {
     box-sizing: border-box;
     margin: 3px;
 }
+.signup input[type='date'] {
+    padding: 0;
+    flex-direction: row;
+}
+
 .title {
     font-family: Georgia;
     margin-bottom: 30px;
@@ -318,3 +319,6 @@ footer {
         height: 400px;
     }
 }
+
+
+
