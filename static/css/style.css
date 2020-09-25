@@ -32,14 +32,14 @@
     font-family: "Arial";
 }
 .dateDiv .btn1 {
-    background: url("btn1.png") no-repeat;
+    background: url("../image/btn1.png") no-repeat;
     border: none;
     width: 32px;
     height: 36px;
     cursor: pointer;
 }
 .dateDiv .btn2 {
-    background: url("btn2.png") no-repeat;
+    background: url("../image/btn2.png") no-repeat;
     border: none;
     width: 32px;
     height: 36px;
@@ -306,6 +306,9 @@ footer {
     }
     .calendar .da {
         align-items: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
     }
     .schedule {
         width: 15px;

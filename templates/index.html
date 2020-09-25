@@ -94,7 +94,7 @@
             categoryNum: '{{ schedule.categoryNum}}'
         });
     {% endfor %}
-
+    console.log(arr);
     let now = new Date();
     let firstDate = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
     let lastlast = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
@@ -122,14 +122,10 @@
         for (let j = firstDate; j < lastDate; j++) {
             if (parseInt(mom + firstDate - 1) == j) {
                 for (let k = j; k <= j + mom2 - mom; k++) {
-                    dates[k].innerHTML += arr[i]['title'];
+                    dates[k].innerHTML += "<div class='schedule'>" + arr[i]['title'] + "</div>";
                 }
             }
         }
     }
 </script>
 {% endblock %}
-<div>
-    <div class="schedule"><div class="text">윙크 회의</div></div>
-    <div class="schedule"><div class="text">스터디</div></div>
-</div>
