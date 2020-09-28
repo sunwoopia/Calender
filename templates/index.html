@@ -122,7 +122,7 @@
         for (let j = firstDate; j < lastDate; j++) {
             if (parseInt(mom + firstDate - 1) == j) {
                 for (let k = j; k <= j + mom2 - mom; k++) {
-                    dates[k].innerHTML += "<div class='schedule'>" + arr[i]['title'] + "</div>";
+                    dates[k].innerHTML += "<div class='schedule'><div class='text'> " + arr[i]['title'] + "</div></div>";
                 }
             }
         }

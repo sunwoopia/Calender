@@ -131,7 +131,7 @@ main {
 }
 .ct1 {
     width: 50%;
-    height: 500px;
+    height: 600px;
     background-color: #dddfe6;
     border-radius: 15px;
     display: flex;
@@ -175,7 +175,21 @@ main {
     padding: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+.signup p {
+    margin-top: 10px;
+}
+.signup select {
+    border-radius: 10px;
+    width: 100px;
+    flex-direction: column;
+    font-size: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    padding: .8em .5em;
+    margin-top: 10px;
 }
 .schedule {
     width: 100%;
@@ -213,6 +227,8 @@ footer {
 .signup input[type='date'] {
     padding: 0;
     flex-direction: row;
+    font-size: 20px;
+    padding: 0px 70px 0px 70px;
 }
 
 .title {
@@ -250,7 +266,14 @@ footer {
     height: 150px;
     background-color: #252c41;
 }
-
+.saveBtn {
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #252c41;
+    color: #FFFFFF;
+    margin: 20px;
+}
 @media (max-width: 850px) {
     .headerDiv {
         height: 80px;
@@ -306,9 +329,6 @@ footer {
     }
     .calendar .da {
         align-items: center;
-        width: 15px;
-        height: 15px;
-        border-radius: 30px;
     }
     .schedule {
         width: 15px;

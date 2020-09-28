@@ -19,6 +19,13 @@ class postSchedule(forms.ModelForm):
             'startDate': DateInput(attrs={'type': 'date'}),
             'lastDate': DateInput(attrs={'type': 'date'}),
         }
+        labels = {
+            'startDate' : '시작 날짜',
+            'lastDate' : '종료 날짜',
+            'title' : '일정 이름',
+            'content' : '내용',
+            'categoryNum' : '카테고리',
+        }
 
 class UserForm(forms.ModelForm):
     class Meta:

@@ -56,6 +56,10 @@ def signin(request):
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
 def schedule(request):
+    today = datetime.datetime.now()
+    nowYear = int(today.strftime('%Y'))
+    nowMonth = int(today.strftime('%m'))
+    nowDay = int(today.strftime('%d'))
     if request.method == 'POST' and request.user.id:
         form = postSchedule(request.POST)
         if form.is_valid():
@@ -65,7 +69,7 @@ def schedule(request):
             return redirect('index')
     else:
         form = postSchedule()
-        return render(request, 'schedule.html', {'form': form})
+        return render(request, 'schedule.html', {'form': form, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay})
 
 def category(request):
     if request.method == "POST" and request.user.id:
