@@ -32,6 +32,11 @@ def index(request):
     return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay})
 
 def signup(request):
+    today = datetime.datetime.now()
+    nowYear = int(today.strftime('%Y'))
+    nowMonth = int(today.strftime('%m'))
+    nowDay = int(today.strftime('%d'))
+
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
@@ -40,7 +45,7 @@ def signup(request):
             return redirect('index')
     else:
         form = UserForm()
-        return render(request, 'signup.html', {'form': form})
+        return render(request, 'signup.html', {'form': form, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay})
 def signin(request):
     if request.method == "POST":
         form = LoginForm(request.POST)

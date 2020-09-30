@@ -1,24 +1,15 @@
 {% extends 'base.html' %}
 {% block container %}
-<div>
-    <h1>로그인</h1>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="로그인"/>
-    </form>
-</div>
-{% endblock %}
-<div class="container1">
-    <div class="ct1">
-        <form class="signup" name="signup" method="post">
-            <h1 class="title">SIGN IN</h1>
-            <div class="inputbox"><label for="id">아이디</label><input class="textbox" type="text" placeholder="이름을 입력하세요" id="id"></div>
-            <div class="inputbox"><label for="pw">비밀번호</label><input class="textbox" type="password" placeholder="비밀번호를 입력하세요" id="pw"></div>
-            <div><button class="button1" type="button"><span>로그인</span></button></div>
-        </form>
+    <div class="container">
+        <div class="signupContainer">
+            <form method="post" action="" class="signup">
+                <h1 class="title">LOGIN</h1>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="saveBtn">Login</button>
+            </form>
+        </div>
     </div>
-</div>
-<div class="footer">
-
-</div>
+    <div class="footer">
+    </div>
+{% endblock %}
