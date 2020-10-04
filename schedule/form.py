@@ -1,6 +1,5 @@
 from django import forms
-from .models import schedule
-from. models import category
+from .models import schedule, category
 from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):

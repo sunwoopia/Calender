@@ -1,14 +1,14 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from .form import postSchedule, signupCategory
-from .form import UserForm, LoginForm
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from .form import postSchedule, signupCategory, UserForm, LoginForm
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from .models import schedule as Sche
+from .models import category as cate
 import datetime
 from datetime import timedelta
 from urllib.parse import parse_qs
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     requestDate = parse_qs(request.META['QUERY_STRING'])
@@ -29,7 +29,8 @@ def index(request):
     lastDay = nextDate - timedelta(days=1)
     lastDays = int(lastDay.strftime('%d'))
     post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
-    return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay})
+    cat = cate.objects.filter(categoryOwner=request.user)
+    return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay, 'cat': cat})
 
 def signup(request):
     today = datetime.datetime.now()
@@ -48,7 +49,6 @@ def signup(request):
         return render(request, 'signup.html', {'form': form, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay})
 def signin(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username = username, password = password)
@@ -76,6 +76,7 @@ def schedule(request):
         form = postSchedule()
         return render(request, 'schedule.html', {'form': form, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay})
 
+@csrf_exempt
 def category(request):
     if request.method == "POST" and request.user.id:
         form = signupCategory(request.POST)
@@ -83,7 +84,8 @@ def category(request):
             post = form.save(commit=False)
             post.categoryOwner_id = request.user.id
             post.save()
-            return redirect('index')
+            return JsonResponse({"msg":"success"})
+        return JsonResponse({"msg": "fail"})
     else:
         form = signupCategory()
         return render(request, 'category.html', {'form': form})

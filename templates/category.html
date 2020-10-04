@@ -1,17 +1,11 @@
-{% extends 'base.html' %}
-{% block container %}
-    <div class="container1">
+<div class="container1">
     <div class="signupContainer">
-        <h1>일정 등록</h1>
+        <h1>카테고리 등록</h1>
         <form method="post" class="signup">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">저장</button>
         </form>
     </div>
-    </div>
-    <div class="footer">
-
-    </div>
-{% endblock %}
 </div>
+

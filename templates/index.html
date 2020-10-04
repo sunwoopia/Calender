@@ -14,17 +14,14 @@
                             <li>설정</li>
                         </ul>
                     </div>
+                    <button id="btn" type="button" class="btn btn-primary btn-lg">팝업</button>
                 </div>
                 <div class="category">
                     <div style="font-size: 20px; font-weight: bold; margin: 20px">
                         CATEGORY
                     </div>
                     <div>
-                        <ul>
-                            <li><input type="checkbox" style="margin-right: 5px;">WINK</li>
-                            <li><input type="checkbox" style="margin-right: 5px;">과제</li>
-                            <li><input type="checkbox" style="margin-right: 5px;">술</li>
-                            <li><input type="checkbox" style="margin-right: 5px;">기타</li>
+                        <ul class="categoryName">
                         </ul>
                     </div>
                 </div>
@@ -84,7 +81,6 @@
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
     let arr = [];
-    let dictionary = {};
     {% for schedule in post %}
         arr.push({
             startDate: '{{ schedule.startDate }}',
@@ -94,7 +90,6 @@
             categoryNum: '{{ schedule.categoryNum}}'
         });
     {% endfor %}
-    console.log(arr);
     let now = new Date();
     let firstDate = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
     let lastlast = new Date(now.getFullYear(), now.getMonth(), 0).getDate()
@@ -127,5 +122,36 @@
             }
         }
     }
+    let categoryArr = [];
+    {% for cat in cat %}
+        categoryArr.push('{{ cat.categoryName }}');
+    {% endfor %}
+    let category = document.querySelector('.categoryName');
+    console.log(category);
+    for (let i = 0; i < categoryArr.length; i++) {
+        console.log(categoryArr[i]);
+        category.innerHTML += "<li>" + categoryArr[i] + "</li>";
+    }
+
+    let formData = new FormData();
+    formData.append("categoryName", "");
+    fetch('/category/', {
+        method: "post",
+        body: formData,
+    }).then(response => response.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', JSON.stringify(response)));
+
+    $('#btn').click(function(event) {
+        event.preventDefault();
+        this.blur();
+
+        $.popup({
+            url: 'category',
+            close: function(result) {
+                console.log(result);
+            }
+        });
+    });
 </script>
 {% endblock %}
