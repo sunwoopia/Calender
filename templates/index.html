@@ -9,12 +9,25 @@
                     </div>
                     <div>
                         <ul>
-                            <li><a href="{% url 'schedule' %}">일정등록</a></li>
-                            <li><a href="{% url 'category' %}">카테고리등록</a></li>
-                            <li>설정</li>
+                            <li><a style="padding: 5px" href="{% url 'schedule' %}">일정등록</a></li>
+                            <li>
+                                <button onclick="modalOnOff('categoryModal', true)" class="categoryBtn">카테고리등록</button>
+                                <div class="categoryModal">
+                                    <div class="modalContent">
+{#                                        <input type="text" class="categorySub">#}
+{#                                        <button onclick="modalOnOff('categoryModal', false)">닫기</button>#}
+{#                                        <button type="submit">카테고리 등록</button>#}
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            {{ catego.as_p }}
+                                            <button type="submit">저장</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><div style="padding: 5px">설정</div></li>
                         </ul>
                     </div>
-                    <button id="btn" type="button" class="btn btn-primary btn-lg">팝업</button>
                 </div>
                 <div class="category">
                     <div style="font-size: 20px; font-weight: bold; margin: 20px">
@@ -76,6 +89,7 @@
             </div>
         </main>
     </div>
+
     <footer>
     </footer>
 <script src="https://momentjs.com/downloads/moment.js"></script>
@@ -130,9 +144,18 @@
     console.log(category);
     for (let i = 0; i < categoryArr.length; i++) {
         console.log(categoryArr[i]);
-        category.innerHTML += "<li>" + categoryArr[i] + "</li>";
+        category.innerHTML += "<li>" + "<input type='checkbox' style='margin: 5px'>" + categoryArr[i] + "</li>";
     }
-
+    let categoryModal = document.querySelector(".categoryModal");
+    function modalOnOff(modalName, show) {
+        switch (modalName) {
+            case "categoryModal":
+                categoryModal.style.display = show ? 'block' : 'none';
+                break
+        }
+    }
+    let cateData = document.querySelector(".categorySub");
+    console.log(cateData)
     let formData = new FormData();
     formData.append("categoryName", "");
     fetch('/category/', {
@@ -141,17 +164,5 @@
     }).then(response => response.json())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', JSON.stringify(response)));
-
-    $('#btn').click(function(event) {
-        event.preventDefault();
-        this.blur();
-
-        $.popup({
-            url: 'category',
-            close: function(result) {
-                console.log(result);
-            }
-        });
-    });
 </script>
 {% endblock %}

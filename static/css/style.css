@@ -287,6 +287,35 @@ footer {
     color: #FFFFFF;
     margin: 20px;
 }
+.categoryModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:rgba(0,0,0,.5)
+}
+.modalContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: white;
+    width: 300px;
+    height: 300px;
+    padding: 30px;
+    margin-top: -150px;
+    margin-left: -150px;
+}
+.categoryBtn {
+    background: #dddfe6;
+    font-size: 16px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+.categoryBtn:hover {
+}
 @media (max-width: 850px) {
     .headerDiv {
         height: 80px;

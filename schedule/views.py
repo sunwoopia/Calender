@@ -30,7 +30,12 @@ def index(request):
     lastDays = int(lastDay.strftime('%d'))
     post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
     cat = cate.objects.filter(categoryOwner=request.user)
-    return render(request, 'index.html', {'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay, 'cat': cat})
+    catego = signupCategory(request.POST)
+    # catego.save()
+    # post = catego.save(commit=False)
+    # post.categoryOwner_id = request.user.id
+    # post.save()
+    return render(request, 'index.html', {'catego': catego, 'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay, 'cat': cat})
 
 def signup(request):
     today = datetime.datetime.now()
@@ -79,13 +84,13 @@ def schedule(request):
 @csrf_exempt
 def category(request):
     if request.method == "POST" and request.user.id:
-        form = signupCategory(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
+        catego = signupCategory(request.POST)
+        if catego.is_valid():
+            post = catego.save(commit=False)
             post.categoryOwner_id = request.user.id
             post.save()
             return JsonResponse({"msg":"success"})
         return JsonResponse({"msg": "fail"})
     else:
-        form = signupCategory()
-        return render(request, 'category.html', {'form': form})
+        catego = signupCategory()
+        return render(request, 'category.html', {'catego': catego})
