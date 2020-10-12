@@ -33,16 +33,34 @@
                     </a>
                 {% endif %}
             </div>
-            <div class="menubar"><img src="menubar.png"></div>
-            <div class="menu" style="opacity: 0; visibility: hidden">
-                <ul>
-                    <li>로그인</li>
-                    <li>회원가입</li>
-                </ul>
+            <div class="menubar" onclick="modalOnOff('menuModal', true)"><img src="../static/image/menubar.png"></div>
+            <div class="menu">
+                <div class="menuSide"></div>
+                <div class="menuContent">
+                    <li>
+                        {% if user.is_authenticated %}
+                            안녕하세요 {{ user.get_username }}님
+                            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">로그인</a></li>
+                            <li><a href="{% url 'signup' %}">회원가입</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
     {% block container %}
     {% endblock %}
 </body>
+<script>
+    let Modal = document.querySelector(".menu");
+    function modalOnOff(modalName, show) {
+        switch (modalName) {
+            case "menuModal":
+                Modal.style.display = show ? 'block' : 'none';
+                break
+        }
+    }
+</script>
 </html>
