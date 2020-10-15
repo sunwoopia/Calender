@@ -9,7 +9,7 @@
                     </div>
                     <div>
                         <ul>
-                            <li><a style="padding: 5px" href="{% url 'schedule' %}">일정등록</a></li>
+                            <li><div style="padding: 5px" onclick="location.href={% url 'schedule' %}">일정등록</div></li>
                             <li>
                                 <button onclick="modalOnOff('categoryModal', true)" class="categoryBtn">카테고리등록</button>
                                 <div class="categoryModal">
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><div style="padding: 5px">설정</div></li>
+{#                            <li><div style="padding: 5px">설정</div></li>#}
                         </ul>
                     </div>
                 </div>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Sunlendar</title>
+    <link href="//fonts.googleapis.com/earlyaccess/hanna.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/stove99/jquery-modal-sample@v1.4/css/animate.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/stove99/jquery-modal-sample@v1.4/css/jquery.modal.css" />
@@ -18,32 +19,34 @@
             <div class="dateDiv">
                 <input type="button" class="btn1">
                 <div class="date">
-                    {{ nowYear }}년 {{ nowMonth }}월 {{ nowDay }}일
+                    <div class="nowyear"></div>
+                    <div class="nowmonth"></div>
+                    <div class="nowday"></div>
                 </div>
                 <input type="button" class="btn2">
             </div>
             <div class="sign">
                 {% if user.is_authenticated %}
-                    안녕하세요 {{ user.get_username }}님
-                    <a href="{% url 'logout' %}">로그아웃</a>
+                    <div class="headerMenu">{{ user.get_username }}</div>
+                    <div class="headerMenu" onclick="location.href={% url 'logout' %}">로그아웃</div>
                 {% else %}
-                    <a href="{% url 'login' %}">로그인</a>
-                    <a href="{% url 'signup' %}" class="member">
+                    <div class="headerMenu" onclick="location.href={% url 'login' %}">로그인</div>
+                    <div class="headerMenu" onclick="location.href={% url 'signup' %}">회원가입</div>
                         회원가입
                     </a>
                 {% endif %}
             </div>
             <div class="menubar" onclick="modalOnOff('menuModal', true)"><img src="../static/image/menubar.png"></div>
             <div class="menu">
-                <div class="menuSide"></div>
+                <div class="menuSide" onclick="modalOnOff('menuModal', false)"></div>
                 <div class="menuContent">
-                    <li>
+                    <ul>
                         {% if user.is_authenticated %}
-                            안녕하세요 {{ user.get_username }}님
-                            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                            <li>{{ user.get_username }}님</li>
+                            <li><div onclick="location.href={% url 'logout' %}">로그아웃</div></li>
                         {% else %}
-                            <li><a href="{% url 'login' %}">로그인</a></li>
-                            <li><a href="{% url 'signup' %}">회원가입</a></li>
+                            <li><div onclick="location.href={% url 'login' %}">로그인</div></li>
+                            <li><div onclick="location.href={% url 'signup' %}">회원가입</div></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -54,6 +57,18 @@
     {% endblock %}
 </body>
 <script>
+    let today = new Date();
+    let nowYear = today.getFullYear();
+    let nowMonth = today.getMonth();
+    let nowDay = today.getDate();
+    nowMonth += 1;
+    let nmonth = document.querySelector(".nowmonth");
+    let nyear = document.querySelector(".nowyear");
+    let nday = document.querySelector(".nowday");
+    nyear.innerHTML = nowYear + "년";
+    nmonth.innerHTML = nowMonth + "월";
+    nday.innerHTML = nowDay + "일";
+
     let Modal = document.querySelector(".menu");
     function modalOnOff(modalName, show) {
         switch (modalName) {
