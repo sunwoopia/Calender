@@ -28,14 +28,13 @@ def index(request):
     nextDate = datetime.datetime(nowYear, nextMonth, 1, 23, 59, 59)
     lastDay = nextDate - timedelta(days=1)
     lastDays = int(lastDay.strftime('%d'))
-    post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
-    cat = cate.objects.filter(categoryOwner=request.user)
-    catego = signupCategory(request.POST)
-    # catego.save()
-    # post = catego.save(commit=False)
-    # post.categoryOwner_id = request.user.id
-    # post.save()
-    return render(request, 'index.html', {'catego': catego, 'post': post, 'nowYear': nowYear, 'nowMonth': nowMonth, 'nowDay': nowDay, 'firstDay': firstDay, 'cat': cat})
+    if not request.user.id:
+        return redirect('login')
+    else:
+        post = Sche.objects.filter(scheduleOwner=request.user).filter(startDate__gte= datetime.datetime(year,month,1,0,0,0)).filter(lastDate__lte=datetime.datetime(year,month,lastDays,23,59,59))
+        cat = cate.objects.filter(categoryOwner=request.user)
+        catego = signupCategory(request.POST)
+        return render(request, 'index.html', {'catego': catego, 'post': post, 'cat': cat})
 
 def signup(request):
     today = datetime.datetime.now()
